@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 const Pizza = ({ name, imageUrl, price, types, sizes }) => {
   const [activeTypes, setActiveTypes] = useState(types[0]);
-  const [activeSizes, setActiveSizes] = useState();
+  const [activeSizes, setActiveSizes] = useState(0);
 
   const selectActiveTypes = (index) => {
     setActiveTypes(index);
@@ -50,7 +50,7 @@ const Pizza = ({ name, imageUrl, price, types, sizes }) => {
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">от {price} ₽</div>
+        <div className="pizza-block__price">от {price} сўм</div>
         <div className="button button--outline button--add">
           <svg
             width="12"

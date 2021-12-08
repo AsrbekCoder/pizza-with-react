@@ -92,6 +92,26 @@
     },
     {
       "id": 9,
+      "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/d2e337e9-e07a-4199-9cc1-501cc44cb8f8.jpg",
+      "name": "Колбаса и гриби",
+      "types": [1],
+      "sizes": [26, 40],
+      "price": 102,
+      "category": 5,
+      "rating": 7
+    },
+    {
+      "id": 11,
+      "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg",
+      "name": "Колбаса и гриби",
+      "types": [0, 1],
+      "sizes": [26, 30, 40],
+      "price": 102,
+      "category": 5,
+      "rating": 7
+    },
+    {
+      "id": 10,
       "imageUrl": "https://dodopizza.azureedge.net/static/Img/Products/Pizza/ru-RU/30367198-f3bd-44ed-9314-6f717960da07.jpg",
       "name": "Овощи и грибы 🌱",
       "types": [0, 1],
