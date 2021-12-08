@@ -14,7 +14,6 @@ const Pizza = ({ name, imageUrl, price, types, sizes }) => {
   const avaibleTypes = ["тонкое", "традиционное"];
   const avaibleSizes = [26, 30, 40];
 
-  console.log(name);
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
