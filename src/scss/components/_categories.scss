@@ -23,8 +23,9 @@
       }
 
       &.active {
-        background-color: #282828;
+        background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
         color: #fff;
+        box-shadow: 0px 3px 6px #86a8e7;
       }
     }
   }
