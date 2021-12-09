@@ -26,6 +26,7 @@
   }
 
   &__popup {
+    z-index: 15;
     position: absolute;
     right: 0;
     margin-top: 15px;

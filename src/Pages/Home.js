@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Categories, SortPopup, Pizza } from "../components/index";
+import ErrorBoundry from "../error/errorBoundry";
 import { setFilter } from "../redux/action/setFiter";
 
 const categoriesNames = [
@@ -33,9 +34,11 @@ const Home = () => {
       <h2 className="content__title">Все пиццы</h2>
 
       <div className="content__items">
-        {pizzasItem.map((obj) => (
-          <Pizza key={obj.id} {...obj} />
-        ))}
+        {pizzasItem.status === 200 ? (
+          pizzasItem.data?.map((obj) => <Pizza key={obj.id} {...obj} />)
+        ) : (
+          <ErrorBoundry />
+        )}
       </div>
     </div>
   );

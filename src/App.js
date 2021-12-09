@@ -2,16 +2,18 @@ import React, { useEffect } from "react";
 import { Header } from "./components/index";
 import { Home, Cart } from "./Pages";
 import { Route, Routes } from "react-router-dom";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setPizzas } from "./redux/action/setPizzas";
-
+import Api from "./serverApi/ActiveServer";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/db.json")
-      .then(({ data }) => dispatch(setPizzas(data.pizzas)));
+    async function fetchPizza() {
+      const respons = await new Api().getApiPizzas();
+      dispatch(setPizzas(respons));
+      console.log(respons);
+    }
+    fetchPizza();
   }, []);
   return (
     <div className="wrapper">
