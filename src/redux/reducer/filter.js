@@ -1,15 +1,23 @@
 const initialState = {
-  categories: 0,
+  categories: null,
   types: "popular",
 };
 
 const filter = (state = initialState, action) => {
-  if (action.type === "SORT_PIZZAS") {
-    return {
-      ...state,
-      types: action.payload,
-    };
+  switch (action.type) {
+    case "SORT_PIZZAS":
+      return {
+        ...state,
+        types: action.payload,
+      };
+    case "SORT_CATEGORY":
+      return {
+        ...state,
+        categories: action.payload,
+      };
+
+    default:
+      return state;
   }
-  return state;
 };
 export default filter;
