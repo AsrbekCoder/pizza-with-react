@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Categories, SortPopup, Pizza } from "../components/index";
 import PizzaLoader from "../components/Loader/PizzaLoader";
 import ErrorBoundry from "../error/errorBoundry";
+import { setCart } from "../redux/action/setCart";
 import { setCategory, setFilter } from "../redux/action/setFiter";
 import { fetchPizzas } from "../redux/action/setPizzas";
-
 const categoriesNames = [
   "Мясные",
   "Вегетарианская",
@@ -22,6 +22,20 @@ const sortItems = [
 const Home = () => {
   const dispatch = useDispatch();
 
+  const onSendSaltBox = (obj) => {
+    dispatch(setCart(obj));
+  };
+
+  const pizzasItem = useSelector(({ pizzas }) => pizzas.items);
+  const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
+  const { categories, types } = useSelector(({ filter }) => filter);
+
+  const carts = useSelector(({ cart }) => cart.items);
+  console.log(carts);
+  useEffect(() => {
+    dispatch(fetchPizzas(categories, types));
+  }, [categories, types]);
+
   const onClickAndSetIdx = useCallback((idx) => {
     dispatch(setCategory(idx));
   }, []);
@@ -29,13 +43,6 @@ const Home = () => {
     dispatch(setFilter(type));
   }, []);
 
-  const pizzasItem = useSelector(({ pizzas }) => pizzas.items);
-  const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
-  const { categories, types } = useSelector(({ filter }) => filter);
-
-  useEffect(() => {
-    dispatch(fetchPizzas(categories, types));
-  }, [categories, types]);
   return (
     <div className="container">
       <div className="content__top">
@@ -55,7 +62,14 @@ const Home = () => {
       <div className="content__items">
         {isLoaded ? (
           pizzasItem.status === 200 ? (
-            pizzasItem.data?.map((obj) => <Pizza key={obj.id} {...obj} />)
+            pizzasItem.data?.map((obj) => (
+              <Pizza
+                key={obj.id}
+                {...obj}
+                appyCart={carts[obj.id]?.length}
+                onSendSaltBox={onSendSaltBox}
+              />
+            ))
           ) : (
             <ErrorBoundry />
           )

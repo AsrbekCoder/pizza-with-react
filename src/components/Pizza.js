@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 import classNames from "classnames";
-const Pizza = ({ name, imageUrl, price, types, sizes }) => {
+import { Button } from ".";
+const Pizza = ({
+  id,
+  name,
+  imageUrl,
+  price,
+  types,
+  sizes,
+  onSendSaltBox,
+  appyCart,
+}) => {
   const [activeTypes, setActiveTypes] = useState(types[0]);
   const [activeSizes, setActiveSizes] = useState(0);
 
+  const avaibleTypes = ["тонкое", "традиционное"];
+  const avaibleSizes = [26, 30, 40];
   const selectActiveTypes = (index) => {
     setActiveTypes(index);
   };
@@ -11,8 +23,17 @@ const Pizza = ({ name, imageUrl, price, types, sizes }) => {
     setActiveSizes(index);
   };
 
-  const avaibleTypes = ["тонкое", "традиционное"];
-  const avaibleSizes = [26, 30, 40];
+  const addFromButton = () => {
+    const obj = {
+      id,
+      name,
+      imageUrl,
+      price,
+      types: avaibleTypes[activeTypes],
+      sizes: avaibleSizes[activeSizes],
+    };
+    onSendSaltBox(obj);
+  };
 
   return (
     <div className="pizza-block">
@@ -50,7 +71,7 @@ const Pizza = ({ name, imageUrl, price, types, sizes }) => {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} сўм</div>
-        <div className="button button--outline button--add">
+        <Button className="button--add" outline onClick={addFromButton}>
           <svg
             width="12"
             height="12"
@@ -64,8 +85,8 @@ const Pizza = ({ name, imageUrl, price, types, sizes }) => {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
-        </div>
+          {!appyCart ? null : <i>{appyCart}</i>}
+        </Button>
       </div>
     </div>
   );
