@@ -14,9 +14,9 @@ const categoriesNames = [
   "Закрытые",
 ];
 const sortItems = [
-  { name: "популярности", type: "popular" },
-  { name: "цене", type: "price" },
-  { name: "алфавиту", type: "alphabet" },
+  { name: "популярности", type: "popular", oreder: "desc" },
+  { name: "цене", type: "price", oreder: "desc" },
+  { name: "алфавиту", type: "name", oreder: "asc" },
 ];
 
 const Home = () => {
@@ -24,18 +24,18 @@ const Home = () => {
 
   const onClickAndSetIdx = useCallback((idx) => {
     dispatch(setCategory(idx));
-  });
+  }, []);
   const onClickSortTypr = useCallback((type) => {
     dispatch(setFilter(type));
-  });
+  }, []);
 
   const pizzasItem = useSelector(({ pizzas }) => pizzas.items);
   const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
   const { categories, types } = useSelector(({ filter }) => filter);
 
   useEffect(() => {
-    dispatch(fetchPizzas());
-  }, [categories]);
+    dispatch(fetchPizzas(categories, types));
+  }, [categories, types]);
   return (
     <div className="container">
       <div className="content__top">
@@ -46,7 +46,7 @@ const Home = () => {
         />
         <SortPopup
           items={sortItems}
-          activeSortBy={types}
+          activeSortBy={types.type}
           onClickSortTypr={onClickSortTypr}
         />
       </div>

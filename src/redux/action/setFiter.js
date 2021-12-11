@@ -1,6 +1,6 @@
-export const setFilter = (items) => ({
+export const setFilter = ({ type, order }) => ({
   type: "SORT_PIZZAS",
-  payload: items,
+  payload: { type, order },
 });
 
 export const setCategory = (catIndex) => ({

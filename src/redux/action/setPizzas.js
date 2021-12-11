@@ -5,9 +5,11 @@ export const setLoaded = (payload) => ({
   payload,
 });
 
-export const fetchPizzas = () => (dispatch) => {
+export const fetchPizzas = (categories, types) => (dispatch) => {
   dispatch(setLoaded(false));
-  new Api().getApiPizzas().then((data) => dispatch(setPizzas(data)));
+  new Api()
+    .getApiPizzas(categories, types)
+    .then((data) => dispatch(setPizzas(data)));
 };
 
 export const setPizzas = (items) => ({

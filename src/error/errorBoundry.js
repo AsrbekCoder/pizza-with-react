@@ -3,7 +3,7 @@ import errorImg from "../asset/img/preview.jpg";
 const errorBoundry = () => {
   return (
     <div className="img_box">
-      <img src={errorImg}></img>
+      <img src={errorImg} alt="Img"></img>
     </div>
   );
 };
