@@ -31,7 +31,6 @@ const Home = () => {
   const { categories, types } = useSelector(({ filter }) => filter);
 
   const carts = useSelector(({ cart }) => cart.items);
-  console.log(carts);
   useEffect(() => {
     dispatch(fetchPizzas(categories, types));
   }, [categories, types]);
@@ -66,7 +65,7 @@ const Home = () => {
               <Pizza
                 key={obj.id}
                 {...obj}
-                appyCart={carts[obj.id]?.length}
+                appyCart={carts[obj.id]?.items.length}
                 onSendSaltBox={onSendSaltBox}
               />
             ))
