@@ -4,7 +4,21 @@ const initialState = {
   itemPrice: 0,
 };
 
-const getTotalSum = (arr) => arr.reduce((sum, obj) => sum + obj.price, 0);
+const getTotalPrice = (arr) => arr.reduce((sum, obj) => sum + obj.price, 0);
+
+const _get = (obj, path) => {
+  const [firstKey, ...keys] = path.split(".");
+  return keys.reduce((val, key) => {
+    return val[key];
+  }, obj[firstKey]);
+};
+
+const getTotalSum = (obj, path) => {
+  return Object.values(obj).reduce((sum, obj) => {
+    const value = _get(obj, path);
+    return sum + value;
+  }, 0);
+};
 
 const cart = (state = initialState, action) => {
   switch (action.type) {
@@ -17,17 +31,67 @@ const cart = (state = initialState, action) => {
         ...state.items,
         [action.payload.id]: {
           items: currentItem,
-          totalPrice: getTotalSum(currentItem),
+          totalPrice: getTotalPrice(currentItem),
         },
       };
-      const linkGet = Object.values(newItem).map((obj) => obj.items);
-      const arrChecker = [].concat.apply([], linkGet);
+
+      const itemCounter = getTotalSum(newItem, "items.length");
+      const itemPrice = getTotalSum(newItem, "totalPrice");
       return {
         ...state,
         items: newItem,
-        itemCounter: arrChecker.length,
-        itemPrice: getTotalSum(arrChecker),
+        itemCounter,
+        itemPrice,
       };
+
+    case "PLUS_CART_ITEM": {
+      const newObjItems = [
+        ...state.items[action.payload].items,
+        state.items[action.payload].items[0],
+      ];
+      const newItems = {
+        ...state.items,
+        [action.payload]: {
+          items: newObjItems,
+          totalPrice: getTotalPrice(newObjItems),
+        },
+      };
+
+      const itemCounter = getTotalSum(newItems, "items.length");
+      const itemPrice = getTotalSum(newItems, "totalPrice");
+
+      return {
+        ...state,
+        items: newItems,
+        itemCounter,
+        itemPrice,
+      };
+    }
+
+    case "MINUS_CART_ITEM": {
+      const oldItems = state.items[action.payload].items;
+      const newObjItems =
+        oldItems.length > 1
+          ? state.items[action.payload].items.slice(1)
+          : oldItems;
+      const newItems = {
+        ...state.items,
+        [action.payload]: {
+          items: newObjItems,
+          totalPrice: getTotalPrice(newObjItems),
+        },
+      };
+
+      const itemCounter = getTotalSum(newItems, "items.length");
+      const itemPrice = getTotalSum(newItems, "totalPrice");
+
+      return {
+        ...state,
+        items: newItems,
+        itemCounter,
+        itemPrice,
+      };
+    }
 
     case "CLEAR_CART":
       return {
@@ -35,6 +99,7 @@ const cart = (state = initialState, action) => {
         itemCounter: 0,
         itemPrice: 0,
       };
+
     case "DELEATE_ITEMS":
       const newDelItem = {
         ...state.items,

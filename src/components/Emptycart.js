@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import cartEmptyIMg from "../asset/img/empty-cart.png";
 
 const Emptycart = () => {
@@ -11,9 +12,9 @@ const Emptycart = () => {
         Для того, чтобы заказать пиццу, перейди на главную страницу.
       </p>
       <img src={cartEmptyIMg} alt="Empty cart" />
-      <a href="/" className="button button--black">
+      <Link to="/" className="button button--black">
         <span>Вернуться назад</span>
-      </a>
+      </Link>
     </div>
   );
 };

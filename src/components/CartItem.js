@@ -7,8 +7,9 @@ const CartItem = ({
   counter,
   onDeleateItesms,
   id,
+  onMinusItem,
+  onPlusItem,
 }) => {
-  console.log(counter);
   const { name, imageUrl, sizes, types } = elements;
   return (
     <div className="cart__item">
@@ -22,7 +23,11 @@ const CartItem = ({
         </p>
       </div>
       <div className="cart__item-count">
-        <div className="button button--outline button--circle cart__item-count-minus">
+        <Button
+          className="button--circle cart__item-count-minus"
+          outline
+          onClick={() => onMinusItem(id)}
+        >
           <svg
             width="10"
             height="10"
@@ -39,9 +44,13 @@ const CartItem = ({
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </Button>
         <b>{counter}</b>
-        <div className="button button--outline button--circle cart__item-count-plus">
+        <Button
+          className="button--circle cart__item-count-plus"
+          outline
+          onClick={() => onPlusItem(id)}
+        >
           <svg
             width="10"
             height="10"
@@ -58,7 +67,7 @@ const CartItem = ({
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </Button>
       </div>
       <div className="cart__item-price">
         <b>{totalPriceOneOf} ₽</b>

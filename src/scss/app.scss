@@ -31,6 +31,7 @@ body {
   }
 
   &__top {
+    margin-top: 75px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -50,6 +51,23 @@ body {
   }
 }
 
+.slider {
+  width: 980px;
+  height: 350px;
+
+  &_slicks {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+}
+.slick-next,
+.slick-prev {
+  width: 40px;
+  z-index: 1;
+  margin: 0 2rem;
+  height: 40px;
+}
 .cart {
   &__top {
     display: flex;

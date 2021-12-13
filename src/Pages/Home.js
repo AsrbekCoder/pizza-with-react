@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Categories, SortPopup, Pizza } from "../components/index";
 import PizzaLoader from "../components/Loader/PizzaLoader";
+import Sliders from "../components/Slider";
 import ErrorBoundry from "../error/errorBoundry";
 import { setCart } from "../redux/action/setCart";
 import { setCategory, setFilter } from "../redux/action/setFiter";
@@ -44,6 +45,7 @@ const Home = () => {
 
   return (
     <div className="container">
+      <Sliders />
       <div className="content__top">
         <Categories
           activeCategoryIdx={categories}

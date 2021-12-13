@@ -1,19 +1,31 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import Emptycart from "../components/Emptycart";
-import { setClear, setDeleate } from "../redux/action/setCart";
+import {
+  setClear,
+  setDeleate,
+  setMinus,
+  setPlus,
+} from "../redux/action/setCart";
 
 const Cart = () => {
   const { items, itemCounter, itemPrice } = useSelector(({ cart }) => cart);
 
   const addedPizza = Object.keys(items).map((key) => items[key].items[0]);
-
+  console.log(items);
   const dispatch = useDispatch();
 
   const onDeleateItesms = (id) => {
     dispatch(setDeleate(id));
+  };
+  const onPlusItem = (id) => {
+    dispatch(setPlus(id));
+  };
+  const onMinusItem = (id) => {
+    dispatch(setMinus(id));
   };
 
   const clearCart = () => {
@@ -107,6 +119,8 @@ const Cart = () => {
                 onDeleateItesms={onDeleateItesms}
                 totalPriceOneOf={items[elements.id].totalPrice}
                 counter={items[elements.id].items.length}
+                onPlusItem={onPlusItem}
+                onMinusItem={onMinusItem}
               />
             ))}
           </div>
@@ -123,8 +137,8 @@ const Cart = () => {
               </span>
             </div>
             <div className="cart__bottom-buttons">
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="button button--outline button--add go-back-btn"
               >
                 <svg
@@ -144,7 +158,7 @@ const Cart = () => {
                 </svg>
 
                 <span>Вернуться назад</span>
-              </a>
+              </Link>
               <div className="button pay-btn">
                 <span>Оплатить сейчас</span>
               </div>
