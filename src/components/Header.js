@@ -51,7 +51,7 @@ const Header = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>{selects.itemCounter}</span>
+              <span>{selects.itemCounter ? selects.itemCounter : ""}</span>
             </Button>
           </Link>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Header } from "./components/index";
-import { Home, Cart, Pay } from "./Pages";
+import { Home, Cart, Pay, Done } from "./Pages";
 import { Route, Routes } from "react-router-dom";
 const App = () => {
   return (
@@ -11,6 +11,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/pay" element={<Pay />} />
+          <Route path="/done" element={<Done />} />
         </Routes>
       </div>
     </div>

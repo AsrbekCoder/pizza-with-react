@@ -328,3 +328,16 @@ body {
     }
   }
 }
+.box_payment {
+  width: 860px;
+}
+.done_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  img {
+    width: 350px;
+  }
+}
