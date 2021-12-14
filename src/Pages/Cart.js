@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
+import { Button } from "../components";
 import Emptycart from "../components/Emptycart";
 import {
   setClear,
@@ -15,7 +16,7 @@ const Cart = () => {
   const { items, itemCounter, itemPrice } = useSelector(({ cart }) => cart);
 
   const addedPizza = Object.keys(items).map((key) => items[key].items[0]);
-  console.log(items);
+
   const dispatch = useDispatch();
 
   const onDeleateItesms = (id) => {
@@ -159,9 +160,11 @@ const Cart = () => {
 
                 <span>Вернуться назад</span>
               </Link>
-              <div className="button pay-btn">
-                <span>Оплатить сейчас</span>
-              </div>
+              <Link to="/pay">
+                <Button className="pay-btn">
+                  <span>Оплатить сейчас</span>
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
