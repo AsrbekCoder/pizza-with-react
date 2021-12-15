@@ -341,3 +341,29 @@ body {
     width: 350px;
   }
 }
+.map {
+  &_choosingLoaction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(13px);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    right: 0;
+    top: 0;
+    z-index: 2;
+  }
+
+  &_choosingLoaction.done_Map {
+    display: none;
+  }
+
+  &_btn {
+    position: absolute;
+    top: 75%;
+    left: 45%;
+    z-index: 15;
+  }
+}
